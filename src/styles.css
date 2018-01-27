@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@angular/material/prebuilt-themes/custom.css';
+
+*{
+    font-family: 'Muli', sans-serif;
+    color:#111111
+}
+
+body{
+    background-color: #FFFFFF; 
+}
+
+h1,i{
+    /* font-family: 'Supermercado One', cursive; */
+    color:#DDDDDD;
+}

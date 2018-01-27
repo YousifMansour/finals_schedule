@@ -1,0 +1,61 @@
+<mat-tab-group>
+  <div>
+    <mat-tab label="Add Courses">
+      <div class="ui-g">
+        <div class="ui-g ui-g-nopad ui-md-nopad">
+          <p-card title="Add Course" class="ui-g-12">
+            <div class="ui-card-content" (keyup.enter)="getFinal(name.value, number.value, section.value); name.value=''; number.value=''; section.value=''">
+              <h4>Course Name</h4>
+              <input pInputText type="text" #name title="Course Name" placeholder="MATH">
+              <h3>Course Number</h3>
+              <input pInputText type="text" #number title="Course Number" placeholder="210">
+              <h3>Section</h3>
+              <input pInputText type="text" #section title="Section" placeholder="optional">
+              <br>
+              <br>
+              <button class="pure-button pure-button-primary" label="Add" (click)="getFinal(name.value, number.value, section.value); name.value=''; number.value=''; section.value=''">Add</button>
+            </div>
+          </p-card>
+        </div>
+
+        <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-md-12 ui-sm-12" *ngIf="finals != undefined">
+          <div style="padding:1%;" class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12" *ngFor="let final of finals">
+            <div>
+              <p-card>
+                <div class="ui-card-content">
+                  Course: {{final.courseName}} {{final.courseNumber}}
+                  <span>
+                    <p-button icon="fa fa-times" iconPos="right" (click)="removeFinal(final);"></p-button>
+                  </span>
+                  <br> Section: {{final.section}}
+                  <br> Location: {{final.roomName}} {{final.roomNumber}}
+                  <br> Date: {{final.monthName}} {{final.monthNumber}}, {{final.year}}
+                  <br> Time: {{final.time}} {{final.amPm}}
+                  <!-- <br> page: {{final.pageNumber}}, row: {{final.rowNumber}} -->
+                </div>
+              </p-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p-growl [(value)]="msgs"></p-growl>
+    </mat-tab>
+
+    <mat-tab label="View Calendar">
+      <div class="ui-g">
+        <div class="ui-g ui-g-nopad ui-md-nopad">
+          <app-calendar-view [events]="events"></app-calendar-view>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab *ngIf="finals.length != 0" label="Double Check">
+      <div class="ui-g">
+        <div class="ui-g-8 ui-g-8 ui-sm-12 ui-sm-offset-0 ui-g-offset-2">
+          <app-table [finals]="finals"></app-table>
+        </div>
+      </div>
+    </mat-tab>
+
+  </div>
+</mat-tab-group>
