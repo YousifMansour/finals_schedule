@@ -113,11 +113,7 @@ let parseOneLine =
   //   rowNumber = 0;
   // } else
   //   rowNumber++;
-  if (rowNumber == MAX_ROWS) {
-    pageNumber++;
-    rowNumber = -1;
-  } else
-    rowNumber++;
+
   line = line[0];
   line = S(line).strip(',');  // strip
   line = S(line).replaceAll('/', ' ');
@@ -224,6 +220,12 @@ let parseOneLine =
         }
       }
 
+      if (rowNumber == MAX_ROWS) {
+    pageNumber++;
+    rowNumber = -1;
+  } else
+    rowNumber++;
+
       parsedJson.push({
         'fullLine': line,
         'pageNumber': pageNumber,
@@ -291,6 +293,12 @@ let parseOneLine =
           }
         }
       }
+
+      if (rowNumber == MAX_ROWS) {
+    pageNumber++;
+    rowNumber = -1;
+  } else
+    rowNumber++;
 
       parsedJson.push({
         'fullLine': line,
