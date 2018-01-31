@@ -1,27 +1,11 @@
-# FinalsPrototyeAgnular
+# AUB Finals Schedule
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4.
+This is a website that makes it easy to find the dates and location of your final exams, and view them in an orginized way using a calendar.
 
-## Development server
+Because AUB puts out the finals in a pdf that contains more than 1200 entries, it can be difficult and annoying to search for one's courses; if not also error prone. This website aims to proivde a simple and elegent solution for this.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## How this works
+So because AUB only provides a pdf file containing the finals, there is nothing else to work with. 
+Using, pdf2json I convert the pdf into text. Then, a server parses all the information of all the exams and exposes an API for the client to query and retireve information from.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Project uses Angular 5 on the frontend and NodeJS (express) on the backend. It is hosted on Vultr.com.
