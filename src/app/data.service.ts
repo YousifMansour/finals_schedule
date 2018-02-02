@@ -7,19 +7,19 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getFinal(courseName: string, courseNumber: string) {
-    var url: string = 'http://107.191.46.198:8080/api/:' + courseName +
+    var url: string = 'https://localhost:8080/api/:' + courseName +
         '/:' + courseNumber + '/getFinal';
     return this.http.get(url, {responseType: 'text'});
   }
 
   getFinalBySection(courseName: string, courseNumber: string, section: string) {
-    var url: string = 'http://107.191.46.198:8080/api/:' + courseName +
+    var url: string = 'https://localhost:8080/api/:' + courseName +
         '/:' + courseNumber + '/:' + section + '/getFinalBySection';
     return this.http.get(url, {responseType: 'text'});
   }
 
   getAllFinals() {
-    var url = 'http://107.191.46.198:8080/api/getData';
+    var url = 'https://localhost:8080/api/getData';
     return this.http.get(url, {responseType: 'text'});
   }
 }
