@@ -1,5 +1,7 @@
 # AUB Finals Schedule
 
+Still a work in progress.
+
 This is a website that makes it easy to find the dates and location of your final exams, and view them in an orginized way using a calendar.
 
 Because AUB puts out the finals in a pdf that contains more than 1200 entries, it can be difficult and annoying to search for one's courses; if not also error prone. This website aims to proivde a simple and elegent solution for this.
