@@ -7,19 +7,21 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   getFinal(courseName: string, courseNumber: string) {
-    var url: string = 'https://aub-finals.tk//api/:' + courseName +
+    var url: string = 'https://aub-finals.tk/api/:' + courseName +
         '/:' + courseNumber + '/getFinal';
     return this.http.get(url, {responseType: 'text'});
   }
 
   getFinalBySection(courseName: string, courseNumber: string, section: string) {
-    var url: string = 'https://aub-finals.tk//api/:' + courseName +
+    var url: string = 'https://aub-finals.tk/api/:' + courseName +
         '/:' + courseNumber + '/:' + section + '/getFinalBySection';
     return this.http.get(url, {responseType: 'text'});
   }
 
   getAllFinals() {
-    var url = 'https://aub-finals.tk//getData';
+    var url = 'https://aub-finals.tk/getData';
     return this.http.get(url, {responseType: 'text'});
   }
+
+  // 'https://aub-finals.tk/getData'
 }

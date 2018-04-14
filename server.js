@@ -185,7 +185,7 @@ let parseOneLine =
 
   parsedJson.push({
     'fullLine': original,
-    'pageNumber': page + ' / ' + pageCount,
+    'pageNumber': page,
     'rowNumber': row,
     'courseName': courseName,
     'courseNumber': courseNumber,
