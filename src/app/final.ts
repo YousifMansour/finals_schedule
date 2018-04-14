@@ -18,7 +18,7 @@ export class Final {
   constructor(
       fullLine: string[], courseName: string, courseNumber: string,
       section: string, roomName: string, roomNumber: string[], weekDay: string,
-      monthName: string, monthNumer: string, year: string, time: string,
+      monthName: string, monthNumber: string, year: string, time: string,
       amPm: string, pageNumber: number, rowNumber: number) {
     this.fullLine = fullLine;
     this.courseName = courseName;
@@ -28,7 +28,7 @@ export class Final {
     this.roomNumber = roomNumber;
     this.weekDay = weekDay;
     this.monthName = monthName;
-    this.monthNumber = monthNumer;
+    this.monthNumber = monthNumber;
     this.year = year;
     this.time = time;
     this.amPm = amPm;

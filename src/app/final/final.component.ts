@@ -47,7 +47,6 @@ export class FinalComponent implements OnInit {
     let size = this.finals.length;
     if (courseName == 'all') {
       this.dataService.getAllFinals().subscribe(function(res) {
-
         let finalData = JSON.parse(res);
 
         for (let data of finalData) {
@@ -72,10 +71,11 @@ export class FinalComponent implements OnInit {
           if (data.roomNumber != undefined)
             Title = Title + ' ' + data.roomNumber;
 
+          // put month instead of 5
           let event = {
             'title': Title,
             'start': data.year + '-' +
-                '12' +
+                '05' +
                 '-' + data.monthNumber + 'T' + Time,
             'id': newFinal.id
           };
@@ -83,7 +83,6 @@ export class FinalComponent implements OnInit {
           // console.log(event);
           this.events.push(event);
         }
-
       }.bind(this));
     } else if (section == '') {
       this.dataService
@@ -92,7 +91,6 @@ export class FinalComponent implements OnInit {
               courseNumber.toUpperCase().replace(' ', ''))
           .subscribe(
               function(res, err) {
-
                 let finalData = JSON.parse(res);
                 for (let data of finalData) {
                   let newFinal = new Final(
@@ -117,10 +115,11 @@ export class FinalComponent implements OnInit {
                   if (data.roomNumber != undefined)
                     Title = Title + ' ' + data.roomNumber;
 
+                  // put month instead of 5
                   let event = {
                     'title': Title,
                     'start': data.year + '-' +
-                        '12' +
+                        '05' +
                         '-' + data.monthNumber + 'T' + Time,
                     'id': newFinal.id
                   };
@@ -154,7 +153,6 @@ export class FinalComponent implements OnInit {
               courseNumber.toUpperCase().replace(' ', ''), section)
           .subscribe(
               function(res) {
-
                 let data = JSON.parse(res);
 
                 let newFinal = new Final(
@@ -178,10 +176,11 @@ export class FinalComponent implements OnInit {
                 if (data.roomNumber != undefined)
                   Title = Title + ' ' + data.roomNumber;
 
+                // put month instead of 5
                 let event = {
                   'title': Title,
                   'start': data.year + '-' +
-                      '12' +
+                      '05' +
                       '-' + data.monthNumber + 'T' + Time,
                   'id': newFinal.id
                 };
