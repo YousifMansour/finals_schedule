@@ -13,3 +13,21 @@ h1,i{
     /* font-family: 'Supermercado One', cursive; */
     color:#DDDDDD;
 }
+
+html {
+    height: 100%;
+  }
+  
+  body {
+    min-height: 100%;
+    position: relative;
+  }
+  
+  footer {
+    /* display: flex; */
+    position: absolute;
+    bottom: 0px;
+    height: 75px;
+    /* left: 1%; */
+    width: 100%;
+  }
