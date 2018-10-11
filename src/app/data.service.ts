@@ -6,22 +6,22 @@ import {Headers, Http, RequestOptions, Response} from '@angular/http';
 export class DataService {
   constructor(private http: HttpClient) {}
 
+  baseUrl = 'https://www.yousifmansour.space/api/aub-finals';
+
   getFinal(courseName: string, courseNumber: string) {
-    var url: string = 'https://aub-finals.tk/api/:' + courseName +
-        '/:' + courseNumber + '/getFinal';
+    var url: string =
+        this.baseUrl + '/:' + courseName + '/:' + courseNumber + '/getFinal';
     return this.http.get(url, {responseType: 'text'});
   }
 
   getFinalBySection(courseName: string, courseNumber: string, section: string) {
-    var url: string = 'https://aub-finals.tk/api/:' + courseName +
-        '/:' + courseNumber + '/:' + section + '/getFinalBySection';
+    var url: string = this.baseUrl + '/:' + courseName + '/:' + courseNumber +
+        '/:' + section + '/getFinalBySection';
     return this.http.get(url, {responseType: 'text'});
   }
 
   getAllFinals() {
-    var url = 'https://aub-finals.tk/getData';
+    var url = this.baseUrl + '/getData';
     return this.http.get(url, {responseType: 'text'});
   }
-
-  // 'https://aub-finals.tk/getData'
 }

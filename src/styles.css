@@ -1,4 +1,4 @@
-/* @import '../node_modules/@angular/material/prebuilt-themes/custom.css'; */
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 
 *{
     font-family: 'Muli', sans-serif;

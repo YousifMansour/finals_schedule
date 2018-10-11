@@ -69,27 +69,29 @@ AUB_BUILDINGS = [
   'Van Dyck'
 ];
 
-let containsWeekDay = function(input) {
-  for (let day of WEEK_DAYS) {
-    if (input.includes(day)) return true;
-  }
-  return false;
+let isWeekDay = function(input) {
+  return (S(input).contains(WEEK_DAYS))
 };
 
 // returns day contained in input. call if input is a weekday
-let getWeekDayFromLine = function(input) {
-  if (input.includes('Monday')) return 'Monday';
-  if (input.includes('Tuesday')) return 'Tuesday';
-  if (input.includes('Wednesday')) return 'Wednesday';
-  if (input.includes('Thursday')) return 'Thursday';
-  if (input.includes('Friday')) return 'Friday';
-  if (input.includes('Saturday')) return 'Saturday';
-  if (input.includes('Sunday')) return 'Sunday';
+let containedWeekDay = function(input) {
+  if (S(input).contains('Monday')) return 'Monday';
+  if (S(input).contains('Tuesday')) return 'Tuesday';
+  if (S(input).contains('Wednesday')) return 'Wednesday';
+  if (S(input).contains('Thursday')) return 'Thursday';
+  if (S(input).contains('Friday')) return 'Friday';
+  if (S(input).contains('Saturday')) return 'Saturday';
+  if (S(input).contains('Sunday')) return 'Sunday';
 };
 
 pdfParser.on(
     'pdfParser_dataError', errData => console.error(errData.parserError));
 pdfParser.on('pdfParser_dataReady', pdfData => {
+  // call parse() on lines or change parse
+
+  // prepare array of lines which contain only exams
+  // parse each line to have it in parsedJson
+  // profit
   rawText = pdfParser.getRawTextContent().split('\n');
   examText = [];
 
@@ -97,7 +99,7 @@ pdfParser.on('pdfParser_dataReady', pdfData => {
     if (S(rawText[i]).contains('Exam ')) pageCount++;
 
     if (!S(rawText[i]).contains('---') && !S(rawText[i]).contains('by Date') &&
-        !S(rawText[i]).contains('Room')) {
+        !S(rawText[i]).contains('RoomDate')) {
       examText.push(rawText[i]);
     }
   }
@@ -114,146 +116,90 @@ let getBuilding =
   return null;
 }
 
-// get month
-let getMonth =
-    function() {
-  let month = new Date().getMonth();
-  switch (month) {
-    case 0:
-      month = 'January';
-      break;
-    case 1:
-      month = 'Febuary';
-      break;
-    case 2:
-      month = 'March';
-      break;
-    case 3:
-      month = 'April';
-      break;
-    case 4:
-      month = 'May';
-      break;
-    case 5:
-      month = 'June';
-      break;
-    case 6:
-      month = 'July';
-      break;
-    case 7:
-      month = 'August';
-      break;
-    case 8:
-      month = 'September';
-      break;
-    case 9:
-      month = 'October';
-      break;
-    case 10:
-      month = 'November';
-      break;
-    case 11:
-      month = 'December';
-      break;
-  }
-  return month;
-}
-
-// month = getMonth();
-// for now month is summer's month Jult
-// NOOOOOO
-let month = 'July';
-let year = new Date().getFullYear();
-
 let parseOneLine =
-    (line) => {
-      // remove day from line
+    function(line) {
+  if (row == rowPerPage) {
+    row = 0;
+    page++;
+  }
 
-      if (containsWeekDay(line)) {
-        line = line.split(getWeekDayFromLine(line));
-        line = line[0] + line[1];
-      }
+  row++;
 
-      if (row == rowPerPage) {
-        row = 0;
-        page++;
-      }
+  original = line;
 
-      row++;
+  line = line.split('July');
 
-      original = line;
+  dateAndTime = line[1];
 
-      line = line.split(month);
 
-      let dateAndTime = line[1];
+  month = 'July';
+  year = '2018';
+  dateAndTime = dateAndTime.replace('\r', '').split('2018');
+  day = dateAndTime.shift().replace(',', '').replace(/ /g, '');
 
-      dateAndTime = dateAndTime.replace('\r', '').split('2018');
-      day = dateAndTime.shift().replace(',', '').replace(/ /g, '');
+  dateAndTime = dateAndTime.join().split(' ');
 
-      dateAndTime = dateAndTime.join().split(' ');
+  time = dateAndTime[0];
+  if (time.length == 4) time = '0' + time;
+  amPm = dateAndTime[1];
 
-      time = dateAndTime[0];
-      if (time.length == 4) time = '0' + time;
-      amPm = dateAndTime[1];
+  line = line[0];
 
-      line = line[0];
+  line = S(line).split(' ');
 
-      line = S(line).split(' ');
+  courseName = line.shift().replace(' ', '').replace(',', '').replace('-', '');
+  if (S(original).contains('-'))
+    courseNumber = line.shift();
+  else {
+    courseNumber = line[0].replace(/[a-z]/g, '').replace(/[A-Z]/g, '');
+    line[0] = line[0].replace(/[0-9]/g, '');
+  }
 
-      courseName =
-          line.shift().replace(' ', '').replace(',', '').replace('-', '');
-      if (S(original).contains('-'))
-        courseNumber = line.shift();
-      else {
-        courseNumber = line[0].replace(/[a-z]/g, '').replace(/[A-Z]/g, '');
-        line[0] = line[0].replace(/[0-9]/g, '');
-      }
+  original = line;
 
-      original = line;
+  line = line.join(' ');
 
-      line = line.join(' ');
 
-      building = getBuilding(line);
+  building = getBuilding(line);
 
-      section = '';
-      roomNumber = '';
+  section = '';
+  roomNumber = '';
 
-      if (building != null) {
-        line = line.split(building);
-        if (line.length > 1) {
-          roomNumber = line.pop()
-                           .replace(' ', '')
-                           .replace(',', '')
-                           .replace('-', '')
-                           .replace(',,', ', ')
-                           .replace('&', '');
+  if (building != null) {
+    line = line.split(building);
+    if (line.length > 1) {
+      roomNumber = line.pop()
+                       .replace(' ', '')
+                       .replace(',', '')
+                       .replace('-', '')
+                       .replace(',,', ', ')
+                       .replace('&', '');
 
-          line = S(line[0]).split(' ');
+      line = S(line[0]).split(' ');
 
-          section =
-              line[line.length - 1].replace(' ', '').replace(',', '').replace(
-                  '-', '');
-        }
-      } else
-        building = null;
-
-      parsedJson.push({
-        'fullLine': original,
-        'pageNumber': page,
-        'rowNumber': row,
-        'courseName': courseName,
-        'courseNumber': courseNumber,
-        'section': section,
-        'roomName': building,
-        'roomNumber': roomNumber,
-        'weekDay': day,
-        'monthName': month,
-        'monthNumber': day,
-        'year': year,
-        'time': time,
-        'amPm': amPm
-      });
+      section = line[line.length - 1].replace(' ', '').replace(',', '').replace(
+          '-', '');
     }
+  } else
+    building = null;
+
+  parsedJson.push({
+    'fullLine': original,
+    'pageNumber': page,
+    'rowNumber': row,
+    'courseName': courseName,
+    'courseNumber': courseNumber,
+    'section': section,
+    'roomName': building,
+    'roomNumber': roomNumber,
+    'weekDay': day,
+    'monthName': month,
+    'monthNumber': day,
+    'year': year,
+    'time': time,
+    'amPm': amPm
+  });
+}
 
 let parse = function(finals) {
   startingIndex = 0;
@@ -273,14 +219,14 @@ let parse = function(finals) {
   for (let line of finals) {
     parseOneLine(line);
   }
-
-  // console.log(parsedJson);
 };
 
 // preparing JSON
 pdfParser.loadPDF('./finals.pdf');
 
 // JSON TEMPLATE
+
+
 
 // server stuff
 app.get('/api/getData', function(req, res) {
@@ -336,6 +282,6 @@ app.get(
       res.end();
     });
 
-app.listen(8888, function() {
-  console.log('listening on port 8888!');
+app.listen(8080, function() {
+  console.log('listening on port 8080!');
 });
