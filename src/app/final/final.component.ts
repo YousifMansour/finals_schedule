@@ -20,6 +20,9 @@ export class FinalComponent implements OnInit {
   events: any[];
   headerConfig: any;
 
+  finals_link: string =
+      'https://www.aub.edu.lb/registrar/Documents/finalexam-bydate.pdf';
+
   constructor(private dataService: DataService) {}
 
   ngOnInit() {

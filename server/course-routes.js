@@ -45,7 +45,6 @@ router.get('/:courseName/:courseNumber/', (req, res) => {
   }
 
   if (array.length == 0) {
-    console.log('status 404');
     res.status(404);
     res.send(
         courseName + ' ' + courseNumber + ' ' +
@@ -67,7 +66,7 @@ router.get('/:courseName/:courseNumber/:section/', (req, res) => {
       return;
     }
   }
-  console.log('status 404');
+
   res.status(404);
   res.send(
       courseName + ' ' + courseNumber + ' ' +

@@ -108,7 +108,7 @@ let getMonth =
   return month;
 }
 
-let month = 'July';
+let month = 'December';
 let year = new Date().getFullYear();
 
 module.exports = {

@@ -6,6 +6,7 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   baseUrl = 'https://www.yousifmansour.space/api/aub-finals';
+  // baseUrl = 'http://localhost:8888/api';
 
   getFinal(courseName: string, courseNumber: string) {
     var url: string = this.baseUrl + '/' + courseName + '/' + courseNumber;
