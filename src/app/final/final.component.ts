@@ -37,6 +37,23 @@ export class FinalComponent implements OnInit {
     this.msgs = new Array<Message>();
   }
 
+  sortFinals() {
+    this.finals.sort((a: Final, b: Final) => {
+      if (Number(a.monthNumber) > Number(b.monthNumber))
+        return 1;
+      else if (Number(a.monthNumber) < Number(b.monthNumber))
+        return -1;
+      else {
+        if (Number(a.amPm) > Number(b.amPm))
+          return 1;
+        else if (Number(a.amPm) < Number(b.amPm))
+          return -1;
+        else
+          return 0;
+      }
+    });
+  }
+
   removeFinal(final: Final) {
     this.finals.splice(this.finals.indexOf(final), 1);
     for (let event of this.events) {
@@ -60,6 +77,7 @@ export class FinalComponent implements OnInit {
               data.pageNumber, data.rowNumber);
 
           this.finals.push(newFinal);
+          this.sortFinals();
 
           let Time: string = data.time;
           if (Time.length == 4) Time = '0' + Time;
@@ -103,7 +121,7 @@ export class FinalComponent implements OnInit {
                       data.time, data.amPm, data.pageNumber, data.rowNumber);
 
                   this.finals.push(newFinal);
-
+                  this.sortFinals();
 
                   let Time: string = data.time;
                   if (Time.length == 4) Time = '0' + Time;
@@ -165,6 +183,7 @@ export class FinalComponent implements OnInit {
                     data.amPm, data.pageNumber, data.rowNumber);
 
                 this.finals.push(newFinal);
+                this.sortFinals();
 
                 let Time: string = data.time;
                 if (Time.length == 4) Time = '0' + Time;
