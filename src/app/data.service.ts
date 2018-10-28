@@ -1,6 +1,5 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
 
 @Injectable()
 export class DataService {
@@ -9,14 +8,13 @@ export class DataService {
   baseUrl = 'https://www.yousifmansour.space/api/aub-finals';
 
   getFinal(courseName: string, courseNumber: string) {
-    var url: string =
-        this.baseUrl + '/:' + courseName + '/:' + courseNumber + '/getFinal';
+    var url: string = this.baseUrl + '/' + courseName + '/' + courseNumber;
     return this.http.get(url, {responseType: 'text'});
   }
 
   getFinalBySection(courseName: string, courseNumber: string, section: string) {
-    var url: string = this.baseUrl + '/:' + courseName + '/:' + courseNumber +
-        '/:' + section + '/getFinalBySection';
+    var url: string =
+        this.baseUrl + '/' + courseName + '/' + courseNumber + '/' + section;
     return this.http.get(url, {responseType: 'text'});
   }
 

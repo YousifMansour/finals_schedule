@@ -1,67 +1,86 @@
-<mat-tab-group>
-  <div>
-    <mat-tab label="Add Courses">
-      <div class="ui-g">
-        <div class="ui-g ui-g-nopad ui-md-nopad">
-          <p-card title="Add Course" class="ui-g-12">
+<div class="pure-g">
+  <span class="pure-u-2-24"></span>
+  <mat-tab-group class="pure-u-20-24">
+    <div style="margin-bottom: 2em;">
+      <mat-tab label="Add Courses">
+        <h1 class="ui-g-12" style="text-align:left; color:black;">Add Course</h1>
+        <div>
+          <div style="text-align:left;">
             <div class="ui-card-content" (keyup.enter)="getFinal(name.value, number.value, section.value); name.value=''; number.value=''; section.value=''">
-              <h4>Course Name</h4>
-              <input pInputText type="text" #name title="Course Name" placeholder="MATH">
-              <h3>Course Number</h3>
-              <input pInputText type="text" #number title="Course Number" placeholder="210">
-              <h3>Section</h3>
-              <input pInputText type="text" #section title="Section" placeholder="optional">
-              <br>
-              <br>
-              <button class="pure-button pure-button-primary" label="Add" (click)="getFinal(name.value, number.value, section.value); name.value=''; number.value=''; section.value=''">Add</button>
-            </div>
-          </p-card>
-        </div>
 
-        <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-md-12 ui-sm-12" *ngIf="finals != undefined">
-          <div style="padding:1%;" class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12" *ngFor="let final of finals">
-            <div>
-              <p-card>
-                <div class="ui-card-content">
-                  Course: {{final.courseName}} {{final.courseNumber}}
-                  <span>
-                    <p-button icon="fa fa-times" iconPos="right" (click)="removeFinal(final);"></p-button>
-                  </span>
-                  <br> Section: {{final.section}}
-                  <br> Location: {{final.roomName}} {{final.roomNumber}}
-                  <br> Date: {{final.monthName}} {{final.monthNumber}}, {{final.year}}
-                  <br> Time: {{final.time}} {{final.amPm}}
-                  <!-- <br> page: {{final.pageNumber}}, row: {{final.rowNumber}} -->
+              <div class="pure-form" style="margin-bottom:2%;">
+
+                <div class="ui-g-3 ui-sm-12 ui-g">
+                  <input pInputText style="margin-bottom: 3%" class="ui-g-12 ui-sm-12" type="text" #name title="Course Name" placeholder="MATH">
+                  <input pInputText style="margin-bottom: 3%" class="ui-g-12 ui-sm-12" type="text" #number title="Course Number" placeholder="201">
+                  <input pInputText style="margin-bottom: 3%" class="ui-g-12 ui-sm-12" type="text" #section title="Section" placeholder="optional . . .">
+                  <button class="ui-g-12 ui-sm-12 pure-button pure-button-primary" label="Add" (click)="getFinal(name.value, number.value, section.value); name.value=''; number.value=''; section.value=''">Add</button>
                 </div>
-              </p-card>
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="ui-g-9 ui-sm-12" *ngIf="finals != undefined">
+            <div *ngFor="let final of finals" style="margin-bottom:1em;">
+              <div>
+                <p-card>
+                  <div class="ui-card-content" class="ui-g">
+                    <div class="ui-g-11 ui-sm-10 ui-g">
+                      <span class="ui-g-3 ui-sm-12">
+                        {{final.courseName}} {{final.courseNumber}} - {{final.section}}
+                      </span>
+                      <span class="ui-g-3 ui-sm-12">
+                        {{final.roomName}} {{final.roomNumber}}
+                      </span>
+                      <span class="ui-g-3 ui-sm-12">
+                        <strong>
+                          {{final.monthName}} {{final.monthNumber}}, {{final.year}}
+                        </strong>
+                      </span>
+                      <span class="ui-g-2 ui-sm-12">
+                        <strong>
+                          {{final.time}} {{final.amPm}}
+                        </strong>
+                      </span>
+                    </div>
+                    <span class="ui-g-1 ui-sm-2">
+                      <p-button icon="fa fa-times" iconPos="right" (click)="removeFinal(final);"></p-button>
+                    </span>
+
+                  </div>
+                </p-card>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <p-growl [(value)]="msgs"></p-growl>
-    </mat-tab>
+        <p-growl [(value)]="msgs"></p-growl>
+      </mat-tab>
 
-    <mat-tab label="View Calendar">
-      <div class="ui-g">
-        <div class="ui-g ui-g-nopad ui-md-nopad">
-          <app-calendar-view [events]="events"></app-calendar-view>
+      <!-- <mat-tab label="View Calendar">
+        <div class="ui-g">
+          <div class="ui-g ui-g-nopad ui-md-nopad">
+            <app-calendar-view [events]="events"></app-calendar-view>
+          </div>
         </div>
-      </div>
-    </mat-tab>
+      </mat-tab> -->
 
-    <mat-tab *ngIf="finals.length != 0" label="Double Check">
-      <div class="ui-g">
-        <div class="ui-g-8 ui-g-8 ui-sm-12 ui-sm-offset-0 ui-g-offset-2">
+      <mat-tab *ngIf="finals.length != 0" label="Double Check">
+        <div class="ui-g" style="margin-top:2%;">
+          <div class="ui-g-10 ui-sm-12 ui-sm-offset-0 ui-g-offset-1">
 
-          <a class="pure-button pure-button-primary" href="https://website.aub.edu.lb/registrar/Documents/pdfdoc/finalexam-bydate.pdf"
-            target="_blank">
-            View Finals PDF
-          </a>
+            <a style="margin-bottom:1%; padding:1%;" class="pure-button pure-button-primary" href="https://website.aub.edu.lb/registrar/Documents/pdfdoc/finalexam-bydate.pdf"
+              target="_blank">
+              View Finals PDF
+            </a>
 
-          <app-table [finals]="finals"></app-table>
+            <app-table [finals]="finals"></app-table>
+          </div>
         </div>
-      </div>
-    </mat-tab>
+      </mat-tab>
 
-  </div>
-</mat-tab-group>
+    </div>
+  </mat-tab-group>
+  <span class="pure-u-2-24"></span>
+</div>

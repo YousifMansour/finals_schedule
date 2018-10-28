@@ -1,33 +1,49 @@
 @import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
 
 *{
-    font-family: 'Muli', sans-serif;
-    color:#111111
+    /* font-family: 'Muli', sans-serif; */
+    color:#111111;
+    margin:0;
+    padding: 0;
+}
+
+html{
+    height: 100%;
+    margin: 0;
+    padding:0;
+    position: relative;
 }
 
 body{
     background-color: #FFFFFF; 
+    min-height: calc(100% - 50px);
+    padding-bottom: 50px;
+    position: relative;
 }
 
-h1,i{
+h1,i,h2{
     /* font-family: 'Supermercado One', cursive; */
     color:#DDDDDD;
+    font-family: 'Slabo 27px', serif;
 }
 
-html {
-    height: 100%;
-  }
-  
-  body {
-    min-height: 100%;
-    position: relative;
-  }
-  
-  footer {
-    /* display: flex; */
+header{
+    color: #DDDDDD;
+    background: #0074D9;;
+    /* font-family: 'Cinzel', serif; */
+    text-align: center;   
+}
+
+footer{
+    background-color:#0074D9;
+    text-align:center;
     position: absolute;
-    bottom: 0px;
-    height: 75px;
-    /* left: 1%; */
-    width: 100%;
-  }
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+
+    font-family: 'Slabo 27px', serif;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
